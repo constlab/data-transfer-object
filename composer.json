@@ -1,0 +1,33 @@
+{
+  "name": "constlab/data-transfer-object",
+  "description": "Simple Data Transfer Object",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Kalinichenko",
+      "email": "kalinichenko@constlab.ru"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "test": "./test"
+  },
+  "autoload": {
+    "psr-4": {
+      "ConstLab\\DTO\\": "src/",
+      "ConstLab\\DTO\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "illuminate/support": "~5.4",
+    "roave/security-advisories": "dev-master"
+  },
+  "require-dev": {
+    "ext-pdo": "*",
+    "phpunit/phpunit": "^6.3",
+    "illuminate/database": "~5.4"
+  }
+}

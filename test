@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Run unit tests in docker container
+#
+
+docker run -v $(pwd):/app --rm phpunit/phpunit:6.0.6 --configuration=phpunit.xml.dist --colors=always
