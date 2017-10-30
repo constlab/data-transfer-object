@@ -75,6 +75,10 @@ abstract class DataTransferObject implements \JsonSerializable, Jsonable, Arraya
         if (method_exists($this, $getter)) {
             return $this->$getter();
         }
+        $getter = 'is' . ucfirst($name);
+        if(method_exists($this, $getter)) {
+            return $this->$getter();
+        }
 
         throw new \BadMethodCallException("Method {$getter} not found in class " . get_class($this));
     }
@@ -122,13 +126,13 @@ abstract class DataTransferObject implements \JsonSerializable, Jsonable, Arraya
     {
         if (empty($this->attributes)) {
             $class = new \ReflectionClass($this);
-            $pattern = '/^get[[:upper:]]{1}(\S)+/';
+            $pattern = '/^(get|is)[[:upper:]]{1}(\S)+/';
             $methods = $class->getMethods(\ReflectionMethod::IS_PROTECTED | \ReflectionMethod::IS_PUBLIC);
 
             foreach ($methods as $method) {
                 $name = $method->getName();
-                if (preg_match($pattern, $name)) { //starts_with('get', $name)
-                    $name = str_replace('get', '', $name);
+                if (preg_match($pattern, $name)) { //starts_with('get' or 'is', $name)
+                    $name = preg_replace('/^(get|is)/', '', $name);
                     $this->attributes[] = lcfirst($name);
                 }
             }
